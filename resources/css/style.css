@@ -1,0 +1,16 @@
+#registration_form {
+	input[type='text'],
+	input[type='password'],
+	input[type='email'] {
+		border: 0.25rem solid gray;
+	}
+
+	small {
+		font-weight: bold;
+		margin-left: 0.25rem;
+	}
+}
+
+#registration_form input:focus {
+	border: 0.25rem solid lightpink;
+}
