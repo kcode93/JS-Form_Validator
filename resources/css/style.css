@@ -1,16 +1,52 @@
+:root {
+	--success-color: #2ecc71;
+	--error-color: #e74c3c;
+	--input-focus-color: #5a5758;
+	--border-color: rgb(163, 160, 160);
+}
+
 #registration_form {
 	input[type='text'],
 	input[type='password'],
 	input[type='email'] {
 		border: 0.25rem solid gray;
 	}
-
-	small {
-		font-weight: bold;
-		margin-left: 0.25rem;
-	}
 }
 
 #registration_form input:focus {
-	border: 0.25rem solid lightpink;
+	border: 0.25rem solid var(--input-focus-color);
 }
+
+#registration_form .form-control.success {
+	border-color: var(--success-color);
+}
+
+#registration_form .form-control.error {
+	border-color: var(--error-color);
+}
+
+#registration_form small {
+	font-weight: bold;
+	margin-left: 0.25rem;
+	visibility: hidden;
+}
+
+#registration_form small.success {
+	color: var(--success-color) !important;
+	visibility: visible;
+}
+
+#registration_form small.error {
+	color: var(--error-color) !important;
+	visibility: visible;
+}
+
+/* .error {
+	color: var(--error-color) !important;
+	visibility: visible;
+}
+
+.success {
+	color: var(--success-color) !important;
+	visibility: visible;
+} */
