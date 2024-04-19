@@ -38,31 +38,27 @@
 						<div class="row">
 							<div class="col-md-6">
 								<div class="mb-3">
-									<label for="exampleInputEmail1" class="form-label fs-3"
-										>Username</label
-									>
+									<label for="username" class="form-label fs-3">Username</label>
 									<input
 										type="text"
 										class="form-control"
-										id="exampleInputEmail1"
-										aria-describedby="emailHelp"
+										id="username"
+										aria-describedby="User Name"
 									/>
-									<small>Error Message!</small>
+									<small id="usernameErr">Error Message!</small>
 								</div>
 							</div>
 
 							<div class="col-md-6">
 								<div class="mb-3">
-									<label for="exampleInputEmail1" class="form-label fs-3"
-										>Email</label
-									>
+									<label for="email" class="form-label fs-3">Email</label>
 									<input
 										type="email"
 										class="form-control"
-										id="exampleInputEmail1"
-										aria-describedby="emailHelp"
+										id="email"
+										aria-describedby="email"
 									/>
-									<small>Error Message!</small>
+									<small id="emailErr">Error Message!</small>
 								</div>
 							</div>
 						</div>
@@ -70,37 +66,39 @@
 						<div class="row">
 							<div class="col-md-6">
 								<div class="mb-3">
-									<label for="exampleInputEmail1" class="form-label fs-3"
-										>Password</label
-									>
+									<label for="password" class="form-label fs-3">Password</label>
 									<input
 										type="password"
 										class="form-control"
-										id="exampleInputEmail1"
-										aria-describedby="emailHelp"
+										id="password"
+										aria-describedby="password"
 									/>
-									<small>Error Message!</small>
+									<small id="passwordErr">Error Message!</small>
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="mb-3">
-									<label for="exampleInputEmail1" class="form-label fs-3"
+									<label for="confirmpassword" class="form-label fs-3"
 										>Confirm Password</label
 									>
 									<input
 										type="password"
 										class="form-control"
-										id="exampleInputEmail1"
-										aria-describedby="emailHelp"
+										id="confirmpassword"
+										aria-describedby="confirm Password"
 									/>
-									<small>Error Message!</small>
+									<small id="passwordErr2">Error Message!</small>
 								</div>
 							</div>
 						</div>
 
 						<div class="row">
 							<div class="col-12 d-flex justify-content-center">
-								<button type="submit" class="btn btn-primary btn-lg w-50">
+								<button
+									id="submit-btn"
+									type="submit"
+									class="btn btn-primary btn-lg w-50"
+								>
 									Submit
 								</button>
 							</div>

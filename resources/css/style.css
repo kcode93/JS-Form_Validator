@@ -40,13 +40,3 @@
 	color: var(--error-color) !important;
 	visibility: visible;
 }
-
-/* .error {
-	color: var(--error-color) !important;
-	visibility: visible;
-}
-
-.success {
-	color: var(--success-color) !important;
-	visibility: visible;
-} */
