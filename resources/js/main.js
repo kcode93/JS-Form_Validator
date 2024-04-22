@@ -22,7 +22,8 @@ function showErrorMsg(input, input_small, message){
 function showSuccessMsg(input, input_small){
     //adds appropiate classes for displaying success
     input.classList.add('success');
-   
+    input_small.innerHTML= '';
+
     //removes error classes
      input.classList.remove('error');
      input_small.classList.remove('error');
@@ -34,30 +35,35 @@ function showSuccessMsg(input, input_small){
 form.addEventListener('submit', function(e){
     e.preventDefault();
     
-    //check for empty values
+    //check for Username empty values
     if(userName.value === ''){
         showErrorMsg(userName, userNameError, "The Username is required");
     }else{
         showSuccessMsg(userName, userNameError);
     }
 
+    //check for email empty values
      if(email.value === ''){
         showErrorMsg(email, emailError, "The email is required");
     }else{
         showSuccessMsg(email, userNameError);
     }
 
+    ////check for password empty values
     if(password.value === ''){
         showErrorMsg(password, passwordError, "The password is required");
     }else{
         showSuccessMsg(password, passwordError);
     }
 
+    ////check for password confirmation empty values
     if(passwordConf.value === ''){
         showErrorMsg(passwordConf, passwordConfError, "Please Confirm your Password");
-    }else if (passwordConf !== password){
+
+    ////check for password confirmation values NOT matching
+    }else if (passwordConf.value !== '' && passwordConf.value !== password.value){
         showErrorMsg(passwordConf, passwordConfError, "The Password Does NOT Match");
-    }else{
+    }else  {
         showSuccessMsg(passwordConf, passwordConfError);
     }
 });
