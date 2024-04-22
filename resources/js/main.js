@@ -31,6 +31,13 @@ function showSuccessMsg(input, input_small){
     console.log('sho');
 }
 
+//validates regular email
+function validateEmail(email) {
+  const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+ const result = re.test(String(email).toLowerCase());
+ return result;
+}
+
 //Event listener
 form.addEventListener('submit', function(e){
     e.preventDefault();
@@ -45,8 +52,10 @@ form.addEventListener('submit', function(e){
     //check for email empty values
      if(email.value === ''){
         showErrorMsg(email, emailError, "The email is required");
+    }else if (!validateEmail(email.value)){
+        showErrorMsg(email, emailError, "NOT a Valid email address");
     }else{
-        showSuccessMsg(email, userNameError);
+        showSuccessMsg(email, emailError);
     }
 
     ////check for password empty values
