@@ -11,37 +11,54 @@ const passwordConfError = document.querySelector('#passwordErr2');
 const submitBtn = document.querySelector('#submit-btn');
 
 //Show input Error Message
-function showErrorMsg(input, input_small, message){
-    //adds appropiate classes for displaying error
-    input.classList.add('error');
-    input_small.classList.add('error');
+function showErrorMsg(input, input_small, message) {
+	//adds appropiate classes for displaying error
+	input.classList.add('error');
+	input_small.classList.add('error');
 
-    input_small.innerHTML= message;
+	input_small.innerHTML = message;
 }
 
-function showSuccessMsg(input, input_small){
-    //adds appropiate classes for displaying success
-    input.classList.add('success');
-    input_small.innerHTML= '';
+function showSuccessMsg(input, input_small) {
+	//adds appropiate classes for displaying success
+	input.classList.add('success');
+	input_small.innerHTML = '';
 
-    //removes error classes
-     input.classList.remove('error');
-     input_small.classList.remove('error');
+	//removes error classes
+	input.classList.remove('error');
+	input_small.classList.remove('error');
 
-    console.log('sho');
+	console.log('sho');
 }
 
 //validates regular email
 function validateEmail(email) {
-  const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
- const result = re.test(String(email).toLowerCase());
- return result;
+	const re =
+		/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	const result = re.test(String(email).toLowerCase());
+	return result;
+}
+
+function validateRequiredFields(inputArray) {
+	//check if input values are empty
+	inputArray.forEach(function (input) {
+		let elementSibling = input.nextElementSibling;
+		if (input.value === '') {
+			showErrorMsg(input, elementSibling, 'This Field is required');
+		} else {
+			showSuccessMsg(input, elementSibling);
+		}
+	});
 }
 
 //Event listener
-form.addEventListener('submit', function(e){
-    e.preventDefault();
-    
+form.addEventListener('submit', function (e) {
+	e.preventDefault();
+
+	validateRequiredFields([userName, email, password, passwordConf]);
+
+	/*----- NOT very efficient Form Validation
+
     //check for Username empty values
     if(userName.value === ''){
         showErrorMsg(userName, userNameError, "The Username is required");
@@ -75,4 +92,6 @@ form.addEventListener('submit', function(e){
     }else  {
         showSuccessMsg(passwordConf, passwordConfError);
     }
+    
+    ---------*/
 });
