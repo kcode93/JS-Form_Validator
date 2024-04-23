@@ -39,23 +39,48 @@ function validateEmail(email) {
 	return result;
 }
 
-function validateRequiredFields(inputArray) {
+function getFieldName(input){
+    return input.id.charAt(0).toUpperCase() + input.id.slice(1);
+}
+
+function checkRequiredFields(inputArray) {
 	//check if input values are empty
 	inputArray.forEach(function (input) {
 		let elementSibling = input.nextElementSibling;
-		if (input.value === '') {
-			showErrorMsg(input, elementSibling, 'This Field is required');
-		} else {
+		if (input.value.trim() === '') {
+			showErrorMsg(input, elementSibling, `${getFieldName(input)} is required`);
+		}else {
 			showSuccessMsg(input, elementSibling);
 		}
 	});
 }
 
+// function checkValidEmail(input){
+//     let elementSibling = input.nextElementSibling;
+//     if (input.value !== '' && !validateEmail(email.value)){
+//         showErrorMsg(input, elementSibling, "NOT a Valid email address");
+//     }
+// }
+
+// function checkMatchingPsw(input, inputConf){
+//     let inputConfSibling = inputConf.nextElementSibling;
+
+//     if (inputConf.value !== input.value){
+//         showErrorMsg(inputConf, inputConfSibling, "The Password Does NOT Match");
+//     }else  {
+//         showSuccessMsg(inputConf, inputConfSibling);
+//     }
+// }
+
 //Event listener
 form.addEventListener('submit', function (e) {
 	e.preventDefault();
 
-	validateRequiredFields([userName, email, password, passwordConf]);
+	checkRequiredFields([userName, email, password, passwordConf]);
+
+    // checkValidEmail(email);
+
+    // checkMatchingPsw(password, passwordConf);
 
 	/*----- NOT very efficient Form Validation
 
