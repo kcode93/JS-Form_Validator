@@ -19,6 +19,7 @@ function showErrorMsg(input, input_small, message) {
 	input_small.innerHTML = message;
 }
 
+//Shows Good Message
 function showSuccessMsg(input, input_small) {
 	//adds appropiate classes for displaying success
 	input.classList.add('success');
@@ -32,14 +33,20 @@ function showSuccessMsg(input, input_small) {
 }
 
 //validates regular email
-function validateEmail(email) {
+function checkEmail(input) {
+    let elementSibling = input.nextElementSibling;
 	const re =
 		/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-	const result = re.test(String(email).toLowerCase());
-	return result;
+	//const result = re.test(String(input).toLowerCase());
+	if(re.test(input.value)){
+        showSuccessMsg(input, elementSibling);
+    }else if (input.value !== '' && !re.test(input.value)){
+        showErrorMsg(input, elementSibling, `${getFieldName(input)} is NOT a Valid email`);
+    }
 }
 
 function getFieldName(input){
+    //capitalizes the first character in string
     return input.id.charAt(0).toUpperCase() + input.id.slice(1);
 }
 
@@ -49,38 +56,42 @@ function checkRequiredFields(inputArray) {
 		let elementSibling = input.nextElementSibling;
 		if (input.value.trim() === '') {
 			showErrorMsg(input, elementSibling, `${getFieldName(input)} is required`);
-		}else {
-			showSuccessMsg(input, elementSibling);
-		}
+		}else{
+            showSuccessMsg(input, elementSibling);
+        }
 	});
 }
 
-// function checkValidEmail(input){
-//     let elementSibling = input.nextElementSibling;
-//     if (input.value !== '' && !validateEmail(email.value)){
-//         showErrorMsg(input, elementSibling, "NOT a Valid email address");
-//     }
-// }
+function checkLength(input, min_length, max_length){
+    //verifies the min and max length of the inputs
+    let elementSibling = input.nextElementSibling;
+    if(input.value !== '' && input.value.length < min_length){
+        showErrorMsg(input, elementSibling, `${getFieldName(input)} must be ${min_length} characters or more`);
+    }else if (input.value !== '' && input.value.length > max_length){
+        showErrorMsg(input, elementSibling, `${getFieldName(input)} can't be more than ${max_length} characters`);
+    }
+}
 
-// function checkMatchingPsw(input, inputConf){
-//     let inputConfSibling = inputConf.nextElementSibling;
+function checkMatchingPsw(psw, pswConfirm){
+    //checks for matching passwords
+    let elementSibling = passwordConf.nextElementSibling;
+    if(pswConfirm.value !== '' && (psw.value === pswConfirm.value)){
+        showSuccessMsg(passwordConf, elementSibling);
+    }else if (pswConfirm.value !== '' && (psw.value !== pswConfirm.value)){
+        showErrorMsg(pswConfirm, elementSibling, `The Password doesn't Match!`);
+    }
+}
 
-//     if (inputConf.value !== input.value){
-//         showErrorMsg(inputConf, inputConfSibling, "The Password Does NOT Match");
-//     }else  {
-//         showSuccessMsg(inputConf, inputConfSibling);
-//     }
-// }
 
 //Event listener
 form.addEventListener('submit', function (e) {
 	e.preventDefault();
 
 	checkRequiredFields([userName, email, password, passwordConf]);
-
-    // checkValidEmail(email);
-
-    // checkMatchingPsw(password, passwordConf);
+    checkLength(userName, 3, 15);
+    checkLength(password, 6, 25);
+    checkEmail(email);
+    checkMatchingPsw(password, passwordConf);
 
 	/*----- NOT very efficient Form Validation
 
